@@ -87,3 +87,6 @@ class CommandLineOAuthHelper
     end
   end
 end
+
+auth = CommandLineOAuthHelper.new 'https://www.googleapis.com/auth/youtube.upload'
+auth.authorize
