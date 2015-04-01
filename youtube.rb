@@ -86,8 +86,7 @@ class YouTube
 
 			videos_insert_response.resumable_upload.send_all(@client)
 
-
-			puts "Video id '#{videos_insert_response.data.id}' was successfully uploaded."
+			#puts "Video id '#{videos_insert_response.data.id}' was successfully uploaded."
 			return videos_insert_response
 		rescue Google::APIClient::TransmissionError => e
 			puts e.result.body
@@ -98,4 +97,4 @@ end
 
 
 youtube = YouTube::new(:oauth_file => "motionium-oauth2.json")
-youtube.upload(:file => 'video.mp4')
+youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description')
