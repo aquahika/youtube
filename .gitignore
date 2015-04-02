@@ -1,3 +1,4 @@
 *.mp4
 *-oauth2.json
 *.json
+*.DS_Store
