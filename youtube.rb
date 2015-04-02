@@ -10,21 +10,22 @@ require 'pp'
 require 'JSON'
 
 class YouTube 
+
 	Faraday.default_adapter = :httpclient
 
 	@@YOUTUBE_UPLOAD_SCOPE = 'https://www.googleapis.com/auth/youtube.upload'
 	@@YOUTUBE_API_SERVICE_NAME = 'youtube'
 	@@YOUTUBE_API_VERSION = 'v3'
 
-
 	def initialize opts={}
+		@application_name = opts.fetch(:application_name){ 'Ruby Youtube API'}
+
 		@client, @youtube = get_authenticated_service(opts[:oauth_file])
 	end
 
-
 	def get_authenticated_service oauth_file
 	  client = Google::APIClient.new(
-	    :application_name => $PROGRAM_NAME,
+	    :application_name => @application_name,
 	    :application_version => '1.0.0'
 	  )
 	  youtube = client.discovered_api(@@YOUTUBE_API_SERVICE_NAME, @@YOUTUBE_API_VERSION)
@@ -33,12 +34,16 @@ class YouTube
 	  #file_storage = Google::APIClient::FileStorage.new("#{$PROGRAM_NAME}-oauth2.json")
 	  file_storage = Google::APIClient::FileStorage.new(oauth_file)
 	  if file_storage.authorization.nil?
+	    
+	    # read client secrets from file
 	    client_secrets = Google::APIClient::ClientSecrets.load
+
 	    flow = Google::APIClient::InstalledAppFlow.new(
 	      :client_id => client_secrets.client_id,
 	      :client_secret => client_secrets.client_secret,
 	      :scope => [@@YOUTUBE_UPLOAD_SCOPE]
 	    )
+
 	    client.authorization = flow.authorize(file_storage)
 	  else
 	    client.authorization = file_storage.authorization
@@ -84,10 +89,11 @@ class YouTube
 			  }
 			)
 
+			#upload the video
 			videos_insert_response.resumable_upload.send_all(@client)
 
-			#puts "Video id '#{videos_insert_response.data.id}' was successfully uploaded."
 			return videos_insert_response
+
 		rescue Google::APIClient::TransmissionError => e
 			puts e.result.body
 		end
@@ -96,5 +102,8 @@ end
 
 
 
-youtube = YouTube::new(:oauth_file => "motionium-oauth2.json")
-youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description')
+#youtube = YouTube::new(:oauth_file => "motionium-oauth2.json")
+#response = youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description')
+
+
+
