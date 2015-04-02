@@ -7,7 +7,7 @@ require 'google/api_client/auth/file_storage'
 require 'google/api_client/auth/installed_app'
 #require 'trollop'
 require 'pp'
-require 'JSON'
+require 'json'
 
 class YouTube 
 	Faraday.default_adapter = :httpclient
