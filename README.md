@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 # youtube
 
-##
-`youtube = YouTube::new(:oauth_file => "motionium-oauth2.json")`  
-`youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description'`
-=======
 # Ruby YouTube Uploader
 Simple Ruby video uploader for YouTube
 
@@ -51,4 +46,3 @@ You can download this json file from Google Developpers Console : <https://conso
 ###Attention
 Choose **"Installed Application"** when you create the Client ID.
 If the type of ID is _"Service Account"_ or _"Web Applicaion"_, application can not refresh the OAuth key successfully. 
->>>>>>> f5ae29f5e96dc1cfeed011cedd68680f2a05b1de
