@@ -101,13 +101,3 @@ class YouTube
 end
 
 
-
-#youtube = YouTube::new(:oauth_file => "motionium-oauth2.json")
-<<<<<<< HEAD
-#youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description')
-=======
-#response = youtube.upload(:file => 'video.mp4',:title=>'これはテスト動画です',:description=>'This is description')
-
-
-
->>>>>>> f5ae29f5e96dc1cfeed011cedd68680f2a05b1de
