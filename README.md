@@ -1,5 +1,3 @@
-# youtube
-
 # Ruby YouTube Uploader
 Simple Ruby video uploader for YouTube
 
